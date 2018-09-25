@@ -17,9 +17,17 @@
   },
   "homepage": "https://github.com/matthewdias/trakt-discord-presence#readme",
   "dependencies": {
+    "@discordjs/uws": "^10.149.0",
+    "bufferutil": "^4.0.0",
     "discord-rich-presence": "0.0.6",
+    "erlpack": "github:discordapp/erlpack",
     "left-pad": "^1.3.0",
     "level": "^4.0.0",
-    "trakt.tv": "^7.0.0"
+    "libsodium-wrappers": "^0.7.3",
+    "register-scheme": "github:devsnek/node-register-scheme",
+    "sodium": "^2.0.3",
+    "trakt.tv": "^7.0.0",
+    "uws": "^9.148.0",
+    "zlib-sync": "^0.1.4"
   }
 }

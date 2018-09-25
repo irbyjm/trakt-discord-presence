@@ -54,40 +54,45 @@ module.exports = class Trakt {
       })
 
       if (watching) {
-        console.log('Trakt: playing')
-        this.watching = watching
+        if (watching.movie) {
+          console.log('Trakt: playing', watching.movie.title)
+        } else {
+          console.log('Trakt: playing', watching.show.title)
+        }
 
         return {
           ...this.getDetails(watching),
           startTimestamp: new Date(watching.started_at).getTime(),
           ...this.getLargeAssets(),
           smallImageKey: 'play',
-          smallImageText: 'Playing'
+          smallImageText: 'Playing',
         }
+      } else {
+        console.log('Trakt: not playing')
       }
 
-      if (this.watching) {
-        console.log('Trakt: paused')
-
-        let type = this.watching.type
-        let playback = await this.client.sync.playback.get({
-          type: type + 's'
-        })
-        let progress = playback
-          .filter(media => media[type].ids.trakt == this.watching[type].ids.trakt)[0]
-
-        if (progress && Date.parse(progress.paused_at) - Date.now() < 600000) {
-          return {
-            ...this.getDetails(this.watching),
-            ...this.getLargeAssets(),
-            smallImageKey: 'pause',
-            smallImageText: 'Paused'
-          }
-        } else {
-          console.log('Trakt: stopped')
-          this.watching = null
-        }
-      }
+      // if (this.watching) {
+      //   console.log('Trakt: paused')
+      //
+      //   let type = this.watching.type
+      //   let playback = await this.client.sync.playback.get({
+      //     type: type + 's'
+      //   })
+      //   let progress = playback
+      //     .filter(media => media[type].ids.trakt == this.watching[type].ids.trakt)[0]
+      //
+      //   if (progress && Date.parse(progress.paused_at) - Date.now() < 600000) {
+      //     return {
+      //       ...this.getDetails(this.watching),
+      //       ...this.getLargeAssets(),
+      //       smallImageKey: 'pause',
+      //       smallImageText: 'Paused'
+      //     }
+      //   } else {
+      //     console.log('Trakt: stopped')
+      //     this.watching = null
+      //   }
+      // }
     } catch (e) {
       console.log(e)
     }
