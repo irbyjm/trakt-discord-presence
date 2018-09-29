@@ -3,7 +3,7 @@
 
 from sys import argv
 import trakt
-import trakt.core
+#import trakt.core
 
 # make sure username is specified so it's not stored somewhere hard
 if len(argv) != 2:
