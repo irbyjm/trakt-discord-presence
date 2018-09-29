@@ -1,4 +1,4 @@
 javascript/node_modules
 javascript/db
 javascript/trakt.sh
-.swp
+*.swp
