@@ -1,9 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # irbyjm 20180929
 
 from sys import argv
 import trakt
-#import trakt.core
 
 # make sure username is specified so it's not stored somewhere hard
 if len(argv) != 2:
