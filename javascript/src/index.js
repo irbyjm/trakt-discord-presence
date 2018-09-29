@@ -13,6 +13,7 @@ setInterval(async () => {
     client = discordRichPresence(process.env.DISCORD_CLIENT)
     client.updatePresence(status)
   } else {
+    console.log('should be disconnecting')
     client.disconnect()
   }
 }, 15000)
