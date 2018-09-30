@@ -1,4 +1,2 @@
-javascript/node_modules
-javascript/db
-javascript/trakt.sh
+watch.sh
 *.swp
