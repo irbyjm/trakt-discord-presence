@@ -1,4 +1,4 @@
-# trakt-discord-presence
+# Trakt 'Watching' Discord Rich Presence
 Update your Discord status based on movies you are watching on Trakt.tv .
 
 _Some assets sourced from: https://github.com/suclearnub/python-discord-rpc/ and https://github.com/matthewdias/trakt-discord-presence_
