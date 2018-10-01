@@ -9,12 +9,13 @@ _Some assets sourced from: https://github.com/suclearnub/python-discord-rpc/ and
 - Discord App API Key
 
 ## Installation
-# Python
+### Python
 Install all relevant Python 3 packages to connect Trakt.tv and Discord (`sudo` as neccessary):
 
 ```pip3 install discord trakt```
 
-# Trakt
+## Getting Started
+### Trakt
 Create a Trakt API App named "Discord" and set the following Redirect URI for OAuth:
 
 ```urn:ietf:wg:oauth:2.0:oob```
@@ -29,3 +30,7 @@ Please enter your client secret: <client secret>
 Please go here and authorize, https://api-v2launch.trakt.tv/oauth/authorize?response_type=code&client_id=...
 Paste the Code returned here: <trakt code>
 ```
+
+### Discord
+
+## Usage
