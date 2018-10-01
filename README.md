@@ -9,7 +9,6 @@ _Some assets sourced from: https://github.com/suclearnub/python-discord-rpc/ and
 - Discord App API Key
 
 ## Installation
-### Python
 Install all relevant Python 3 packages to connect Trakt.tv and Discord (`sudo` as neccessary):
 
 ```pip3 install discord trakt```
