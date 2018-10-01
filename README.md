@@ -19,7 +19,7 @@ Create a Trakt API App named "Discord" and set the following Redirect URI for OA
 
 ```urn:ietf:wg:oauth:2.0:oob```
 
-Record the Client ID and Client Secret for initializing the Trakt API module. Using this information and your Trakt username, run `./trakt_init.py`, receiving a PIN from Trakt at the end:
+Record the Client ID and Client Secret for initializing the Trakt API module. Using this information and your Trakt username, run `trakt_init.py`, receiving a PIN from Trakt at the end:
 ```
 [user@host trakt-discord-presence]$ ./trakt_init.py <trakt username>
 If you do not have a client ID and secret. Please visit the following url to create them.
