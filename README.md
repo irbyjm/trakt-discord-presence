@@ -52,7 +52,7 @@ The Trakt-Discord connector may be ran directly or called via another script for
 [user@host trakt-discord-presence] ./trakt_discord.py <trakt username> <discord client id>
 ````
 
-To not have to keep referencing the Discord Dlient ID manually, this may be scripted as so:
+To not have to keep referencing the Discord Client ID manually, this may be scripted as so:
 ````bash
 #!/bin/bash
 
