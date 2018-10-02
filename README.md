@@ -30,6 +30,8 @@ Please go here and authorize, https://api-v2launch.trakt.tv/oauth/authorize?resp
 Paste the Code returned here: <trakt code>
 ```
 
+This will cause Trakt API information to be stored in `~/.pytrakt.json` for future reference.
+
 ### Discord
 Create a Discord API App (https://discordapp.com/developers/applications/) named "Trakt" and record the Discord Client ID for authorizing the trakt-discord application.
 
