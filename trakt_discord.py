@@ -11,10 +11,17 @@ if len(argv) != 3:
     print("Usage: ./trakt_discord.py [username] [Discord_client_ID]")
 else:
     username = argv[1]
-    # Trakt API errors must occur here
-    # Figure out where this connects, blackhole it, then catch the error
-    # Loop until reconnect
-    my = User(username)
+
+    trakt_connected = 0
+    while trakt_connected == 0:
+        try:
+            my = User(username)
+            trakt_connected = 1
+            print("Successfully connected to Trakt")
+        except Exception:
+            print("Trakt Connection Failure")
+            time.sleep(15)
+
     client_id = argv[2]
     # Same thing here; attempt to force this script to live while on an island
     # I don't want to see a command prompt when I'm expecting this to keep going
