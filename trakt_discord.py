@@ -30,10 +30,11 @@ else:
     time.sleep(5)
 
     while True:
-        if my.watching:
+        watching = my.watching
+        if watching:
             # my.watching may have turned into NoneType at some point and died
             # this caused timetamp to fail because started_at was invalid
-            timestamp = int(time.mktime(time.strptime(my.watching.started_at[:-1]+"UTC", "%Y-%m-%dT%H:%M:%S.000%Z")))
+            timestamp = int(time.mktime(time.strptime(watching.started_at[:-1]+"UTC", "%Y-%m-%dT%H:%M:%S.000%Z")))
             activity = {
                     "timestamps": {
                         "start": timestamp
@@ -46,13 +47,13 @@ else:
                     }
             }
 
-            if "Movie" in str(my.watching.__class__):
-                details  = "".join((my.watching.title, " (", str(my.watching.year), ")"))
+            if "Movie" in str(watching.__class__):
+                details  = "".join((watching.title, " (", str(watching.year), ")"))
                 activity["details"] = details
                 print("Trakt: playing", details)
             else:
-                details = my.watching.show
-                state = "".join(("S", str(my.watching.season), "E", str(my.watching.episode), " (", my.watching.title  , ")"))
+                details = watching.show
+                state = "".join(("S", str(watching.season), "E", str(watching.episode), " (", watching.title  , ")"))
                 activity["details"] = details
                 activity["state"] = state
                 print("Trakt: playing", details, state)
