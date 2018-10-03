@@ -12,11 +12,11 @@ if len(argv) != 3:
 else:
     username = argv[1]
 
-    trakt_connected = 0
-    while trakt_connected == 0:
+    trakt_connected = False
+    while not trakt_connected:
         try:
             my = User(username)
-            trakt_connected = 1
+            trakt_connected = True
             print("Successfully connected to Trakt")
         except Exception:
             print("Trakt Connection Failure")
