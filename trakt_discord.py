@@ -17,9 +17,9 @@ else:
         try:
             my = User(username)
             trakt_connected = True
-            print("Successfully connected to Trakt")
+            print("** Successfully connected to Trakt (1)")
         except Exception:
-            print("Trakt Connection Failure")
+            print("** Trakt Connection Failure (1)")
             time.sleep(15)
 
     client_id = argv[2]
@@ -30,46 +30,49 @@ else:
     time.sleep(5)
 
     while True:
-        watching = my.watching
-        if watching:
-            # my.watching may have turned into NoneType at some point and died
-            # this caused timetamp to fail because started_at was invalid
-            timestamp = int(time.mktime(time.strptime(watching.started_at[:-1]+"UTC", "%Y-%m-%dT%H:%M:%S.000%Z")))
-            activity = {
-                    "timestamps": {
-                        "start": timestamp
-                    },
-                    "assets": {
-                        "small_text": "Playing",
-                        "small_image": "play",
-                        "large_text": "Trakt",
-                        "large_image": "trakt"
-                    }
-            }
+        try:
+            watching = my.watching
+            if watching:
+                # my.watching may have turned into NoneType at some point and died
+                # this caused timetamp to fail because started_at was invalid
+                timestamp = int(time.mktime(time.strptime(watching.started_at[:-1]+"UTC", "%Y-%m-%dT%H:%M:%S.000%Z")))
+                activity = {
+                        "timestamps": {
+                            "start": timestamp
+                        },
+                        "assets": {
+                            "small_text": "Playing",
+                            "small_image": "play",
+                            "large_text": "Trakt",
+                            "large_image": "trakt"
+                        }
+                }
 
-            if "Movie" in str(watching.__class__):
-                details  = "".join((watching.title, " (", str(watching.year), ")"))
-                activity["details"] = details
-                print("Trakt: playing", details)
+                if "Movie" in str(watching.__class__):
+                    details  = "".join((watching.title, " (", str(watching.year), ")"))
+                    activity["details"] = details
+                    print("Trakt: playing", details)
+                else:
+                    details = watching.show
+                    state = "".join(("S", str(watching.season), "E", str(watching.episode), " (", watching.title  , ")"))
+                    activity["details"] = details
+                    activity["state"] = state
+                    print("Trakt: playing", details, state)
+                try:
+                    # Figure out how to set a sentinel on this
+                    # We don't need to change this every 15 seconds
+                    rpc_obj.set_activity(activity)
+                except:
+                    rpc_obj = rpc.DiscordIpcClient.for_platform(client_id)
             else:
-                details = watching.show
-                state = "".join(("S", str(watching.season), "E", str(watching.episode), " (", watching.title  , ")"))
-                activity["details"] = details
-                activity["state"] = state
-                print("Trakt: playing", details, state)
-            try:
-                # Figure out how to set a sentinel on this
-                # We don't need to change this every 15 seconds
-                rpc_obj.set_activity(activity)
-            except:
-                rpc_obj = rpc.DiscordIpcClient.for_platform(client_id)
-        else:
-            try:
-                # Figure out if this is actually sending Trakt something
-                # If it's not actually sending packets to Trakt if it's not
-                # Then I don't particularly care
-                print("Trakt: not playing")
-                rpc_obj.close()
-            except:
-                pass
+                try:
+                    # Figure out if this is actually sending Trakt something
+                    # If it's not actually sending packets to Trakt if it's not
+                    # Then I don't particularly care
+                    print("Trakt: not playing")
+                    rpc_obj.close()
+                except:
+                    pass
+        except:
+            print("** Trakt Connection Failure (2)")
         time.sleep(15)
