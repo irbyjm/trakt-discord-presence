@@ -37,7 +37,7 @@ else:
             time.sleep(15)
 
     client_id = argv[2]
-    # Same thing here; attempt to force this script to live while on an island
+    # force this script to live on an island and catch the errors
     # I don't want to see a command prompt when I'm expecting this to keep going
     rpc_obj = rpc.DiscordIpcClient.for_platform(client_id)
     os.environ['TZ']='UTC'
@@ -47,8 +47,6 @@ else:
         try:
             watching = my.watching
             if watching:
-                # my.watching may have turned into NoneType at some point and died
-                # this caused timetamp to fail because started_at was invalid
                 timestamp = int(time.mktime(time.strptime(watching.started_at[:-1]+"UTC", "%Y-%m-%dT%H:%M:%S.000%Z")))
                 activity = {
                         "timestamps": {
