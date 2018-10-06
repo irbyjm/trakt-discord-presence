@@ -10,7 +10,7 @@ import signal
 
 def signal_handler(sig, frame):
     runtime = round((time.time() - start)/60/60, 2)
-    print('Ctrl+C Pressed; exiting after', runtime, 'hours')
+    print('\n** Ctrl+C pressed; exiting after', runtime, 'hours')
     try:
         rpc_obj.close()
     except:
@@ -31,9 +31,9 @@ else:
         try:
             my = User(username)
             trakt_connected = True
-            print("** Successfully connected to Trakt (1)")
+            print("** Successfully connected to Trakt")
         except Exception:
-            print("** Trakt Connection Failure (1)")
+            print("** Trakt Connection Failure")
             time.sleep(15)
 
     client_id = argv[2]
@@ -88,5 +88,5 @@ else:
                 except:
                     pass
         except:
-            print("** Trakt Connection Failure (2)")
+            print("** Trakt Connection Failure")
         time.sleep(15)
