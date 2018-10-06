@@ -6,6 +6,20 @@ from trakt.users import User
 import time
 import rpc
 import os
+import signal
+
+def signal_handler(sig, frame):
+    runtime = round((time.time() - start)/60/60, 2)
+    print('Ctrl+C Pressed; exiting after', runtime, 'hours')
+    try:
+        rpc_obj.close()
+    except:
+        pass
+    exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
+
+start = time.time()
 
 if len(argv) != 3:
     print("Usage: ./trakt_discord.py [username] [Discord_client_ID]")
