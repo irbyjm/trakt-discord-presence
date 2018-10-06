@@ -62,6 +62,7 @@ To not have to keep referencing the Discord Client ID manually, this may be scri
 If the above steps were successful, output similar to the following should be visible (assuming the user is not currently checked in on Trakt; and assuming a bash script was created named `watch.sh`):
 ````
 [user@host trakt-discord-presence] ./watch.sh
+** Successfully conected to Trakt
 Trakt: not playing
 ````
 
