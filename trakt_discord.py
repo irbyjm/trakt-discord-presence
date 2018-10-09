@@ -60,16 +60,16 @@ else:
                         }
                 }
 
-                if "Movie" in str(watching.__class__):
-                    details  = "".join((watching.title, " (", str(watching.year), ")"))
-                    activity["details"] = details
-                    print("Trakt: playing", details)
-                else:
+                if watching.media_type == "episodes":
                     details = watching.show
                     state = "".join(("S", str(watching.season), "E", str(watching.episode), " (", watching.title  , ")"))
                     activity["details"] = details
                     activity["state"] = state
                     print("Trakt: playing", details, state)
+                else:
+                    details  = "".join((watching.title, " (", str(watching.year), ")"))
+                    activity["details"] = details
+                    print("Trakt: playing", details)
                 try:
                     # Figure out how to set a sentinel on this
                     # We don't need to change this every 15 seconds
