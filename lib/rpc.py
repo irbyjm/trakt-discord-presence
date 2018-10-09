@@ -1,3 +1,6 @@
+# sourced from https://github.com/mitgobla/python-discord-rpc/
+# -- forked from https://github.com/suclearnub/python-discord-rpc/
+
 # References:
 # * https://github.com/devsnek/discord-rpc/tree/master/src/transports/IPC.js
 # * https://github.com/devsnek/discord-rpc/tree/master/example/main.js
