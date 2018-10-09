@@ -1,6 +1,3 @@
-#-----------
-# sourced from https://github.com/suclearnub/python-discord-rpc/ @ 20180929
-
 # References:
 # * https://github.com/devsnek/discord-rpc/tree/master/src/transports/IPC.js
 # * https://github.com/devsnek/discord-rpc/tree/master/example/main.js
@@ -60,7 +57,8 @@ class DiscordIpcClient(metaclass=ABCMeta):
         pass
 
     def _do_handshake(self):
-        ret_op, ret_data = self.send_recv({'v': 1, 'client_id': self.client_id}, op=OP_HANDSHAKE)
+        ret_op, ret_data = self.send_recv(
+            {'v': 1, 'client_id': self.client_id}, op=OP_HANDSHAKE)
         # {'cmd': 'DISPATCH', 'data': {'v': 1, 'config': {...}}, 'evt': 'READY', 'nonce': None}
         if ret_op == OP_FRAME and ret_data['cmd'] == 'DISPATCH' and ret_data['evt'] == 'READY':
             return
@@ -91,7 +89,7 @@ class DiscordIpcClient(metaclass=ABCMeta):
         return buf
 
     def close(self):
-#        logger.warning("closing connection")
+        #logger.warning("closing connection")
         try:
             self.send({}, op=OP_CLOSE)
         finally:
@@ -132,10 +130,47 @@ class DiscordIpcClient(metaclass=ABCMeta):
 
     def set_activity(self, act):
         # act
+
+        activity_dict = act
+        # Checks if not using RPC Hard Mode formatting
+        if not act.keys() & {"timestamps", "assets", "party", "secrets"}:
+            # Fill in values. If a value doesn't exist, it is set as None
+            activity_dict = {
+                "state": act.get("state"),
+                "details": act.get("details"),
+                "timestamps": {
+                    "start": act.get("startTimestamp"),
+                    "end": act.get("endTimestamp")
+                },
+                "assets": {
+                    "large_image": act.get("largeImageKey"),
+                    "large_text": act.get("largeImageText"),
+                    "small_image": act.get("smallImageKey"),
+                    "small_text": act.get("smallImageText")
+                },
+                "party": {
+                    "id": act.get("partyId"),
+                    "size": [v for v in [act.get("partySize"), act.get("partyMax")] if v]
+                },
+                "secrets": {
+                    "join": act.get("joinSecret", None),
+                    "spectate": act.get("spectateSecret", None),
+                    "match": act.get("matchSecret", None)
+                }}
+            activity_reduced = {}
+            # Now remove all None values from the activity
+            for key, value in activity_dict.items(): # Remove unnecessary data
+                activity_reduced[key] = activity_dict[key]
+                if isinstance(value, dict):
+                    activity_reduced[key] = {k: v for k, v in activity_dict[key].items() if v}
+                    if not activity_reduced[key]:
+                        del activity_reduced[key]
+
+            activity_dict = activity_reduced
         data = {
             'cmd': 'SET_ACTIVITY',
             'args': {'pid': os.getpid(),
-                     'activity': act},
+                     'activity': activity_dict},
             'nonce': str(uuid.uuid4())
         }
         self.send(data)

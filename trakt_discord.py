@@ -4,7 +4,7 @@
 from sys import argv
 from trakt.users import User
 import time
-import rpc
+import lib.rpc as rpc
 import os
 import signal
 
