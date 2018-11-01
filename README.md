@@ -47,12 +47,12 @@ Rich Presence | Small Image Key | play
 Art Assets | Cover Image | icons/large/trakt.png
 
 ## Usage
-The Trakt-Discord connector may be ran directly or called via another script for ease-of-use. The applicaion may be ran directly as so:
+The Trakt-Discord connector may be ran directly or called via another script for ease-of-use. The application may be ran directly as so:
 ````
 [user@host trakt-discord-presence] ./trakt_discord.py <trakt username> <discord client id>
 ````
 
-To not have to keep referencing the Discord Client ID manually, this may be scripted as so:
+To not have to keep referencing the Discord Client ID manually, this may be scripted as:
 ````bash
 #!/bin/bash
 
