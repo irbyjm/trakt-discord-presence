@@ -33,15 +33,16 @@ else:
             trakt_connected = True
             print("** Successfully connected to Trakt")
         except Exception:
-            print("** Trakt Connection Failure")
+            print("** Trakt Connection Failure (1)")
             time.sleep(15)
 
     client_id = argv[2]
     # force this script to live on an island and catch the errors
     # I don't want to see a command prompt when I'm expecting this to keep going
+    # Spit an error for OSError: [Errno 107] Transport endpoint is not connecte
+    # Discord has to be running before this is--duh
     rpc_obj = rpc.DiscordIpcClient.for_platform(client_id)
     os.environ['TZ']='UTC'
-    time.sleep(5)
 
     while True:
         try:
@@ -71,20 +72,19 @@ else:
                     activity["details"] = details
                     print("Trakt: playing", details)
                 try:
-                    # Figure out how to set a sentinel on this
-                    # We don't need to change this every 15 seconds
                     rpc_obj.set_activity(activity)
+                    print("sending data to Discord")
                 except:
                     rpc_obj = rpc.DiscordIpcClient.for_platform(client_id)
             else:
                 try:
                     # Figure out if this is actually sending Trakt something
-                    # If it's not actually sending packets to Trakt if it's not
+                    # If it's not actually sending packets to Trakt
                     # Then I don't particularly care
                     print("Trakt: not playing")
                     rpc_obj.close()
                 except:
                     pass
         except:
-            print("** Trakt Connection Failure")
+            print("** Trakt Connection Failure (2)")
         time.sleep(15)
