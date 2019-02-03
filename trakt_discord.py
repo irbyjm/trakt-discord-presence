@@ -10,7 +10,7 @@ import signal
 
 def signal_handler(sig, frame):
     runtime = round((time.time() - start)/60/60, 2)
-    print('\n** Ctrl+C pressed; exiting after', runtime, 'hours')
+    print('\n', time.strftime("%Y-%m-%dT%H:%M:%S.000%Z"), ': Ctrl+C pressed; exiting after', runtime, 'hours')
     try:
         rpc_obj.close()
     except:
@@ -31,9 +31,9 @@ else:
         try:
             my = User(username)
             trakt_connected = True
-            print("** Successfully connected to Trakt")
+            print(time.strftime("%Y-%m-%dT%H:%M:%S.000%Z"), ": Successfully connected to Trakt")
         except Exception:
-            print("** Trakt Connection Failure (1)")
+            print(time.strftime("%Y-%m-%dT%H:%M:%S.000%Z"), ": Trakt Connection Failure (1)")
             time.sleep(15)
 
     client_id = argv[2]
@@ -66,14 +66,14 @@ else:
                     state = "".join(("S", str(watching.season), "E", str(watching.episode), " (", watching.title  , ")"))
                     activity["details"] = details
                     activity["state"] = state
-                    print("Trakt: playing", details, state)
+                    print(time.strftime("%Y-%m-%dT%H:%M:%S.000%Z"), ": Trakt: playing", details, state)
                 else:
                     details  = "".join((watching.title, " (", str(watching.year), ")"))
                     activity["details"] = details
-                    print("Trakt: playing", details)
+                    print(time.strftime("%Y-%m-%dT%H:%M:%S.000%Z"), ": Trakt: playing", details)
                 try:
                     rpc_obj.set_activity(activity)
-                    print("sending data to Discord")
+                    print(time.strftime("%Y-%m-%dT%H:%M:%S.000%Z"), ": DEBUG : Sending data to Discord")
                 except:
                     rpc_obj = rpc.DiscordIpcClient.for_platform(client_id)
             else:
@@ -81,10 +81,10 @@ else:
                     # Figure out if this is actually sending Trakt something
                     # If it's not actually sending packets to Trakt
                     # Then I don't particularly care
-                    print("Trakt: not playing")
+                    print(time.strftime("%Y-%m-%dT%H:%M:%S.000%Z"), ": Trakt: not playing")
                     rpc_obj.close()
                 except:
                     pass
         except:
-            print("** Trakt Connection Failure (2)")
+            print(time.strftime("%Y-%m-%dT%H:%M:%S.000%Z"), ": Trakt Connection Failure (2)")
         time.sleep(15)
