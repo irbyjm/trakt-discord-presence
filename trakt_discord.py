@@ -73,7 +73,7 @@ else:
                     print(time.strftime("%Y-%m-%dT%H:%M:%S.000%Z"), ": Trakt: playing", details)
                 try:
                     rpc_obj.set_activity(activity)
-                    print(time.strftime("%Y-%m-%dT%H:%M:%S.000%Z"), ": DEBUG : Sending data to Discord")
+                    # print(time.strftime("%Y-%m-%dT%H:%M:%S.000%Z"), ": DEBUG : Sending data to Discord")
                 except:
                     rpc_obj = rpc.DiscordIpcClient.for_platform(client_id)
             else:
