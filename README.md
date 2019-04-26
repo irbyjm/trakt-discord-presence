@@ -66,4 +66,4 @@ If the above steps were successful, output similar to the following should be vi
 Trakt: not playing
 ````
 
-This script may then run on startup or via `cron`, if desired.
+This script may then run on startup, if desired.
