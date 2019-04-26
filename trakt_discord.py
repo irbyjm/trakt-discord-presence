@@ -4,6 +4,7 @@
 from sys import argv
 from trakt.users import User
 import time
+from calendar import timegm
 import lib.rpc as rpc
 import os
 import signal
@@ -42,13 +43,12 @@ else:
     # Spit an error for OSError: [Errno 107] Transport endpoint is not connecte
     # Discord has to be running before this is--duh
     rpc_obj = rpc.DiscordIpcClient.for_platform(client_id)
-    os.environ['TZ']='UTC'
 
     while True:
         try:
             watching = my.watching
             if watching:
-                timestamp = int(time.mktime(time.strptime(watching.started_at[:-1]+"UTC", "%Y-%m-%dT%H:%M:%S.000%Z")))
+                timestamp = int(timegm(time.strptime(watching.started_at, "%Y-%m-%dT%H:%M:%S.000Z")))
                 activity = {
                         "timestamps": {
                             "start": timestamp
