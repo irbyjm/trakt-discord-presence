@@ -11,7 +11,7 @@ _Some assets sourced from: https://github.com/mitgobla/python-discord-rpc/ and h
 ## Installation
 Install all relevant Python 3 packages to connect Trakt.tv and Discord (`sudo` as neccessary):
 
-```pip3 install discord trakt```
+```pip3 install trakt```
 
 ## Getting Started
 ### Trakt
