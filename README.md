@@ -7,6 +7,7 @@ _Some assets sourced from: https://github.com/mitgobla/python-discord-rpc/ and h
 - Trakt.tv account
 - Trakt.tv App API Key
 - Discord App API Key
+- Local Discord client for RPC connectivity
 
 ## Installation
 Install all relevant Python 3 packages to connect Trakt.tv and Discord (`sudo` as neccessary):
