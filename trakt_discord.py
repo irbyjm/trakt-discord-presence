@@ -5,7 +5,7 @@ from sys import argv
 from trakt.users import User
 import time
 from calendar import timegm
-import lib.rpc as rpc
+import libs.rpc as rpc
 import os
 import signal
 
