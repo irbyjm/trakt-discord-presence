@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # irbyjm 20180929
 
+import config
 from sys import argv
 from trakt.users import User
 import time
@@ -22,10 +23,10 @@ signal.signal(signal.SIGINT, signal_handler)
 
 start = time.time()
 
-if len(argv) != 3:
+if len(argv) != 1:
     print("Usage: ./trakt_discord.py [username] [Discord_client_ID]")
 else:
-    username = argv[1]
+    username = config.username
 
     trakt_connected = False
     while not trakt_connected:
