@@ -27,7 +27,7 @@ If you do not have a client ID and secret. Please visit the following url to cre
 http://trakt.tv/oauth/applications
 Please enter your client id: <client id>
 Please enter your client secret: <client secret>
-Please go here and authorize, https://api-v2launch.trakt.tv/oauth/authorize?response_type=code&...
+Please go here and authorize, https://api.trakt.tv/oauth/authorize?response_type=code&...
 Paste the Code returned here: <trakt code>
 ```
 
