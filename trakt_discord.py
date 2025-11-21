@@ -43,7 +43,7 @@ else:
         rpc_obj = discordrpc.RPC(
                 app_id=client_id,
                 output=False,
-                debug=False,
+                debug=False
         )
         print(time.strftime("%Y-%m-%dT%H:%M:%S.000%Z"), ": Successfully connected to Discord")
     except ConnectionRefusedError:
@@ -81,7 +81,7 @@ else:
                         rpc_obj = discordrpc.RPC(
                             app_id=client_id,
                             output=False,
-                            debug=False,
+                            debug=False
                         )
                         print(time.strftime("%Y-%m-%dT%H:%M:%S.000%Z"), ": Successfully connected to Discord")
                     except:
