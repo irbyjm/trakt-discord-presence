@@ -10,7 +10,7 @@ _Some assets sourced from: https://github.com/mitgobla/python-discord-rpc/ and h
 - Local Discord client for RPC connectivity
 
 ## Installation
-Install all relevant Python 3 packages to connect Trakt.tv and Discord (`sudo` as neccessary):
+Install all relevant Python 3 packages to connect Trakt.tv and Discord (`sudo` as necessary):
 
 ```pip3 install pytrakt discord-rpc```
 
